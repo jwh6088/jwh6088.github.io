@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="什么是Promise、Promise是如何工作的，以及JavaScript中如何使用Promise">
+  <meta name="description" content="线上的代码多是压缩后的，如果线上有报错却只能调试那个代码多半是个噩梦。因此需要sourcemap帮助我们搭建起源代码及压缩后代码的联系。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript Promise">
-<meta property="og:url" content="http://example.com/2021/10/15/JavaScript-Promise/index.html">
+<meta property="og:title" content="sourcemap">
+<meta property="og:url" content="http://example.com/2021/05/20/sourcemap/index.html">
 <meta property="og:site_name" content="江南织造总局">
-<meta property="og:description" content="什么是Promise、Promise是如何工作的，以及JavaScript中如何使用Promise">
+<meta property="og:description" content="线上的代码多是压缩后的，如果线上有报错却只能调试那个代码多半是个噩梦。因此需要sourcemap帮助我们搭建起源代码及压缩后代码的联系。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-15T08:35:57.000Z">
-<meta property="article:modified_time" content="2021-10-15T09:25:21.554Z">
+<meta property="article:published_time" content="2021-05-20T01:51:43.000Z">
+<meta property="article:modified_time" content="2021-05-20T01:51:43.000Z">
 <meta property="article:author" content="jwh">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/10/15/JavaScript-Promise/">
+<link rel="canonical" href="http://example.com/2021/05/20/sourcemap/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>JavaScript Promise | 江南织造总局</title>
+  <title>sourcemap | 江南织造总局</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/15/JavaScript-Promise/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/20/sourcemap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript Promise
+          sourcemap
         </h1>
 
         <div class="post-meta">
@@ -177,9 +177,8 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-15 16:35:57 / 修改时间：17:25:21" itemprop="dateCreated datePublished" datetime="2021-10-15T16:35:57+08:00">2021-10-15</time>
+              <time title="创建时间：2021-05-20 09:51:43" itemprop="dateCreated datePublished" datetime="2021-05-20T09:51:43+08:00">2021-05-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -187,12 +186,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                  <a href="/categories/%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">调试</span></a>
                 </span>
             </span>
 
           
-            <div class="post-description">什么是Promise、Promise是如何工作的，以及JavaScript中如何使用Promise</div>
+            <div class="post-description">线上的代码多是压缩后的，如果线上有报错却只能调试那个代码多半是个噩梦。因此需要sourcemap帮助我们搭建起源代码及压缩后代码的联系。</div>
 
         </div>
       </header>
@@ -203,52 +202,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h5 id="什么是Promise"><a href="#什么是Promise" class="headerlink" title="什么是Promise"></a>什么是Promise</h5><p>主要用于异步计算，可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果，可以在对象之间传递和操作promise，帮助我们处理队列。<br>在新建 promise 的时候就传入了两个参数resolve、reject，用来标记 promise的状态，可以随意命名，是promise对象中的回调函数<br>resolve(value): 表明 Promise 任务成功，调用then()的成功回调函数。<br>reject(error): 表明 Promise 任务失败，调用then()的错误回调函数。<br>如果 Promise 成功，则调用成功回调，如果失败，调用失败回调。<br>在异步任务完成之前，Promise 只是一个占位符。当你定义了一个 Promise，你并不会立即获得返回值，而是获得一个 Promise 对象。</p>
-<h5 id="在JavaScript中使用Promise"><a href="#在JavaScript中使用Promise" class="headerlink" title="在JavaScript中使用Promise"></a>在JavaScript中使用Promise</h5><h6 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h6><pre><code class="javascript">// 方式1 通过构造函数声明Promise对象
-const myPromise = new Promise((resolve, reject) =&gt; &#123;
-  setTimeout(() =&gt; &#123;
-    resolve(&#39;this is the eventual value the promise will return&#39;);
-  &#125;, 3000);
-&#125;);
-console.log(myPromise);
-//方式2 使用Promise内置API 
-const anotherPromise = Promise.resolve(&quot;this is the eventual value the promise will return&quot;)
-console.log(anotherPromise);
+        <h5 id="MDN对sourcemap的解释"><a href="#MDN对sourcemap的解释" class="headerlink" title="MDN对sourcemap的解释"></a>MDN对sourcemap的解释</h5><p>调试原始源代码会比浏览器下载的转换后的代码更加容易。 source map是从已转换的代码映射到原始源的文件，使浏览器能够重构原始源并在调试器中显示重建的原始源。</p>
+<h5 id="sourcemap文件是否影响网页性能"><a href="#sourcemap文件是否影响网页性能" class="headerlink" title="sourcemap文件是否影响网页性能"></a>sourcemap文件是否影响网页性能</h5><p>sourcemap只有在打开devtools的情况下才会开始下载，并且浏览器在Network里隐藏了，所以不打开detools并不会影响网页性能。</p>
+<h5 id="sourcemap存在标准吗"><a href="#sourcemap存在标准吗" class="headerlink" title="sourcemap存在标准吗"></a>sourcemap存在标准吗</h5><p>sourcemap 是存在一个标准的，为 Google 及 Mozilla 的工程师制定。<br>文档地址：<a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit">https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit</a><br>各个打包器基本都基于 <a target="_blank" rel="noopener" href="https://github.com/mozilla/source-map">https://github.com/mozilla/source-map</a> 来生成 sourcemap，当然也存在一些魔改的方案，但是标准都是统一的。<br>通过上面的库生成出来的sourcemap格式大致如下，可以对比各个打包器的产物，格式及内容大部分都是一致的：</p>
+<pre><code class="javascript">&#123;
+  version: 3, // 版本号
+  file: &quot;min.js&quot;, // 编译后的文件名
+  names: [&quot;bar&quot;, &quot;baz&quot;, &quot;n&quot;], // 一个优化用的字段，后续会在 mappings 中用到
+  sources: [&quot;one.js&quot;, &quot;two.js&quot;], //多个源文件名
+  sourceRoot: &quot;http://example.com/www/js/&quot;,
+  mappings: &quot;CAAC,IAAI,IAAM,SAAUA,GAClB,OAAOC,IAAID;CCDb,IAAI,IAAM,SAAUE,GAClB,OAAOA&quot; // 表示了源代码及编译后代码的关系
+&#125;
 </code></pre>
-<h6 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h6><p>Promise 对象也能被_rejected_。大多数时候，rejected  的发生是因为执行异步任务的时候抛出了错误，此时就会调用reject()方法。<br>下面的示例展示了一个 Promise 对象是如何执行 reject 方法的:</p>
-<pre><code class="javascript">const myPromise = new Promise((resolve, reject) =&gt; &#123;
-  let a = false;
-  setTimeout(() =&gt; &#123;
-    return (a) ? resolve(&#39;a is found!&#39;): reject(&#39;sorry, no a&#39;);
-  &#125;, 3000);
-&#125;); 
+<h5 id="浏览器怎么知道源文件和sourcemap的关系"><a href="#浏览器怎么知道源文件和sourcemap的关系" class="headerlink" title="浏览器怎么知道源文件和sourcemap的关系"></a>浏览器怎么知道源文件和sourcemap的关系</h5><p>以 webpack 做个实验，通过 webpack5 对于以下代码进行打包：</p>
+<pre><code class="javascript">// index.js
+const a = 1
+console.log(a)
 </code></pre>
-<h6 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h6><p>你可以定义两个回调函数，当 Promise 返回成功或失败时进行回调。这两个回调函数定义在then()内：</p>
-<pre><code class="javascript">const anotherPromise = new Promise((resolve, reject) =&gt; &#123;
-  setTimeout(() =&gt; &#123;
-    resolve(&#39;this is the eventual value the promise will return&#39;);
-  &#125;, 3000);
-&#125;);
-// CONTINUATION
-anotherPromise
-.then(value =&gt; &#123; console.log(value) &#125;)
-// 原则上可以无限链式调用，调用链会依次执行，而且前一个 then 的返回值作为参数传入后一个 then。
-anotherPromise
-.then(fulfillFn, rejectFn)
-.then(fulfilFn, rejectFn)
-.then(value =&gt; &#123; console.log(value) &#125;)
+<p>当开启sourcemap选项以后，产物应该为两个文件，分别为 bundle.js 以及 bundle.js.map。</p>
+<pre><code class="javascript">// bundle.js 
+console.log(1);
+//# sourceMappingURL=bundle.js.map
 </code></pre>
-<h6 id="使用catch"><a href="#使用catch" class="headerlink" title="使用catch()"></a>使用catch()</h6><p>then()方法必须有两个回调函数：第一个参数是成功回调，第二个参数是错误回调。<br>如果没有传入第二个回调函数，如果代码报错，就没有错误回调捕获错误信息。<br>如果执意要在then()中只定义一个回调函数（即成功回调），那么你就需要在 Promise 调用链的末端调用catch()方法捕获任何可能的报错信息。<br>在 Promise 调用链上，无论哪个环节报错，catch()方法都会被调用。</p>
-<pre><code class="javascript">const myPromise = new Promise((resolve, reject) =&gt; &#123;
-  let a = false;
-  setTimeout(() =&gt; &#123;
-    return (a) ? resolve(&#39;a is found!&#39;): reject(&#39;sorry, no a&#39;);
-  &#125;, 3000);
-&#125;); 
-myPromise
-.then(value =&gt; &#123; console.log(value) &#125;)
-.catch(err =&gt; &#123; console.log(err) &#125;);;
+<p>sourceMappingURL 就是标记了该文件的 sourcemap 地址。<br>除此之外，还可以通过 response header 的 SourceMap: <url> 字段来表明。</p>
+<h5 id="sourcemap是如何对应到源代码的"><a href="#sourcemap是如何对应到源代码的" class="headerlink" title="sourcemap是如何对应到源代码的"></a>sourcemap是如何对应到源代码的</h5><p>以刚才打包的文件为例，来看产出的 sourcemap：</p>
+<pre><code class="javascript">&#123;
+  sources:[&quot;webpack://webpack-source-demo/./src/index.js&quot;],
+  names: [&#39;console&#39;, &#39;log&#39;],
+  mappings: &#39;AACAA,QAAQC,IADE&#39;,
+&#125;
 </code></pre>
+<p>一、appings 的内容其实是 Base64 VLQ 的编码表示。<br>内容由三部分组成，分别为：<br>• 英文，表示源码及压缩代码的位置关联<br>• 逗号，分隔一行代码中的内容。比如说 console.log(a) 就由 console 、log 及 a 三部分组成，所以存在两个逗号。<br>• 分号，代表换行<br>英文内容：<br>其实这就是一种压缩数字内容的编码方式，毕竟源代码可能很庞大，用数字表示行数及列数的话 sourcemap 文件将也会很庞大，因此选用 Base64 来代表数字用以减少文件体积。<br>比如说 A 代表了数字 0，C 代表了数字 1 等等。<br>其实这每串英文中的字母都代表了一个位置：<br>1.压缩代码的第几列<br>2.哪个源代码文件，毕竟可以多个文件打包成一个，对应 sources 字段<br>3.源代码第几行<br>4.源代码第几列<br>5.names 字段里的索引<br>二、通过以上可以解析下 AACAA 的具体含义：，通过对照 <a target="_blank" rel="noopener" href="https://www.murzwin.com/base64vlq.html">https://www.murzwin.com/base64vlq.html</a> 我们可以知道 AACAA 对应了 [0,0,1,0,0]，这里需要注意的是数字都从 0 开始<br>所以上述英文内容解析为：<br>1.压缩代码的第一列<br>2.第一个源代码文件，也就是 index.js 文件了<br>3.源代码第二行了<br>4.源代码的第一列<br>5.names 数组中的第一个索引，也就是 console<br>通过以上的解析，我们就能知道 console 在源代码及压缩文件中的具体位置了。<br>三、sourcemap通过AST可以知道编译后的代码具体位置</p>
+<h5 id="sourcemap-的应用"><a href="#sourcemap-的应用" class="headerlink" title="sourcemap 的应用"></a>sourcemap 的应用</h5><p>一般来说 source map 的应用都是在监控系统中，开发者构建完应用后，通过插件将源代码及 sourcemap 上传至平台中。一旦客户端上报错误后，我们就可以通过  <a target="_blank" rel="noopener" href="https://github.com/mozilla/source-map">https://github.com/mozilla/source-map</a> 这个库来还原源代码的报错位置（具体 API 看文档即可），方便开发者快速定位线上问题。</p>
 
     </div>
 
@@ -263,11 +248,11 @@ myPromise
 
         
     <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/10/07/article202110071654/" rel="prev" title="article202110071654">
-      <i class="fa fa-chevron-left"></i> article202110071654
-    </a></div>
       <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/15/vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" rel="next" title="vue组件通信">
+      vue组件通信 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -326,7 +311,7 @@ myPromise
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFPromise"><span class="nav-text">什么是Promise</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8JavaScript%E4%B8%AD%E4%BD%BF%E7%94%A8Promise"><span class="nav-text">在JavaScript中使用Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-text">创建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="nav-text">链式调用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8catch"><span class="nav-text">使用catch()</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#MDN%E5%AF%B9sourcemap%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-text">MDN对sourcemap的解释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sourcemap%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E5%BD%B1%E5%93%8D%E7%BD%91%E9%A1%B5%E6%80%A7%E8%83%BD"><span class="nav-text">sourcemap文件是否影响网页性能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sourcemap%E5%AD%98%E5%9C%A8%E6%A0%87%E5%87%86%E5%90%97"><span class="nav-text">sourcemap存在标准吗</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%BA%90%E6%96%87%E4%BB%B6%E5%92%8Csourcemap%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">浏览器怎么知道源文件和sourcemap的关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sourcemap%E6%98%AF%E5%A6%82%E4%BD%95%E5%AF%B9%E5%BA%94%E5%88%B0%E6%BA%90%E4%BB%A3%E7%A0%81%E7%9A%84"><span class="nav-text">sourcemap是如何对应到源代码的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sourcemap-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">sourcemap 的应用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -341,14 +326,14 @@ myPromise
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -375,7 +360,7 @@ myPromise
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

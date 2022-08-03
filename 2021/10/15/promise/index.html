@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="dependency和devDependency拆分">
+  <meta name="description" content="什么是Promise、Promise是如何工作的，以及JavaScript中如何使用Promise。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端项目依赖管理优化">
-<meta property="og:url" content="http://example.com/2021/10/07/article202110071610/index.html">
+<meta property="og:title" content="JavaScript Promise">
+<meta property="og:url" content="http://example.com/2021/10/15/promise/index.html">
 <meta property="og:site_name" content="江南织造总局">
-<meta property="og:description" content="dependency和devDependency拆分">
+<meta property="og:description" content="什么是Promise、Promise是如何工作的，以及JavaScript中如何使用Promise。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-07T08:10:06.000Z">
-<meta property="article:modified_time" content="2021-10-10T05:34:44.861Z">
+<meta property="article:published_time" content="2021-10-15T08:35:57.000Z">
+<meta property="article:modified_time" content="2022-08-03T10:44:43.656Z">
 <meta property="article:author" content="jwh">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/10/07/article202110071610/">
+<link rel="canonical" href="http://example.com/2021/10/15/promise/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>前端项目依赖管理优化 | 江南织造总局</title>
+  <title>JavaScript Promise | 江南织造总局</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/article202110071610/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/15/promise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          前端项目依赖管理优化
+          JavaScript Promise
         </h1>
 
         <div class="post-meta">
@@ -178,14 +178,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-10-07 16:10:06" itemprop="dateCreated datePublished" datetime="2021-10-07T16:10:06+08:00">2021-10-07</time>
+              <time title="创建时间：2021-10-15 16:35:57" itemprop="dateCreated datePublished" datetime="2021-10-15T16:35:57+08:00">2021-10-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-10 13:34:44" itemprop="dateModified" datetime="2021-10-10T13:34:44+08:00">2021-10-10</time>
+                <time title="修改时间：2022-08-03 18:44:43" itemprop="dateModified" datetime="2022-08-03T18:44:43+08:00">2022-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -193,12 +193,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+                  <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
                 </span>
             </span>
 
           
-            <div class="post-description">dependency和devDependency拆分</div>
+            <div class="post-description">什么是Promise、Promise是如何工作的，以及JavaScript中如何使用Promise。</div>
 
         </div>
       </header>
@@ -209,36 +209,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>1.Node.js 将依赖分为 dependency 与 devDependency 两部分，却公用同一个 node_modules 文件夹的方式，不适用当下越来越复杂的前端项目开发过程。<br>2.工具依赖与业务依赖共用同一个 node_modules 文件夹，会使得开发与构建过程变得低效与脆弱，包括以下问题：node_modules 臃肿低效、版本漂移、Monorepo 架构不适配、CI 构建过程脆弱等。<br>3.解决方法是关注点分离，将业务依赖和工具依赖单独放置，比如业务依赖纳入版本管理系统，工具依赖进行 precompile，并由专门的构建团队进行发布，开发者可以选择版本进行全局安装。</p>
-<h5 id="node-modules-现状"><a href="#node-modules-现状" class="headerlink" title="node_modules 现状"></a>node_modules 现状</h5><p>我们看很多包的时候都会发现很多依赖并不是自己主动安装的，而在这些依赖当中，很少是在开发和构建过程、最终产品里面用到的依赖</p>
-<blockquote>
-<p>单独安装 React 和 ReactDOM，只占用 3.9M 空间。<br>单独安装 Vue，也只占用 3.6M 空间。<br>使用 create-react-app 创建一个空白 React 项目，占用 189.6M 空间。<br>使用 vue-cli 创建一个空白 Vue 项目，占用 164.5M 空间。</p>
-</blockquote>
-<p>开发过程中会用到很多工具：打包工具、开发服务器、测试框架、各种 linters、TypeScript 编译器、Babel 等等。这些工具又都有自己的依赖，子又生孙，孙又生子，子子孙孙无穷尽也。而这些工具依赖，只是在开发和构建过程中使用，甚至是在不同的阶段才会使用，比如很多单元测试，其实是在线上 CI 的过程才会跑，但是却都会装进 node_modules 文件夹里，和业务依赖搅在一起。</p>
-<h5 id="DevDependency-带来的问题"><a href="#DevDependency-带来的问题" class="headerlink" title="DevDependency 带来的问题"></a>DevDependency 带来的问题</h5><p>工具依赖与业务依赖共用 node_modules，带来的不仅是文件夹莫名增大，npm install 缓慢的问题，同时更会带来依赖版本漂移，引起各种莫名其妙的 BUG。<br>前端工程发展到今天，已经进入一个复杂度暴涨的时代，这是由于前端要处理的资源种类暴涨带来的，不同的资源，又需要不同的工具来进行处理，再叠加上前端技术的高速迭代，5年的时间，构建工具就从 Grunt、Gulp 变化到了 Webpack、Parcel、Rollup，未来更有 Vite、Snowpack、Esbuild 等，这样高速的工具更新，再乘上资源种类的增长，带来的是工具复杂度的急速提升，同时也带来对于工具版本控制的强烈依赖。而在目前 semantic version 的管理方法下，一个小小的业务依赖的 npm install 下，都有可能引起工具依赖各种未知的版本漂移，对于整个构建过程的稳定性，都带来极大的挑战。删除重装一时爽，版本不对火葬场。</p>
-<h5 id="优化方式"><a href="#优化方式" class="headerlink" title="优化方式"></a>优化方式</h5><p>一方面，对于 devDependency 的工具依赖，我们将其从 node_modules 里面拆离出来，更进一步，我们可以把这些工具依赖封装成一个团队专属的 build 工具，然后每个业务开发的同学只需要将其安装到全局，在自己的项目里甚至连 Babel 都不需要，就安装几个业务上需要的依赖，这样的开发体验，岂不爽哉！对于封装的工具，可以交给专门的构建小组进行维护，甚至可以封装成二级制的包，比如采用 pkg、deno compile 更进一步的提高效能。</p>
-<p>另一方面，对于dependency 的业务依赖，我们可以继续留在 node_modules 里面，更进一步，我们可以将 node_modules 纳入到 git 的版本控制中。由于工具依赖已经拆离出去了，剩下的都是业务依赖，本来就是要构建到最终产品中的，我们需要保证在各个环境中的强一致性，同时拆离了工具依赖的 node_modules 大小也会降到一个合理的水平，纳入到 git 的控制下，并不会带来多大的额外开销。</p>
-<blockquote>
-<p>关于把 node_modules 纳入 git 的管理，是否会使得开销过大，这里我们可以设想一下，在任何一个长期运行的项目中，业务依赖相对于自有代码，最多比例也就在 1：1，不可能会出现在一个成熟的商业项目中，自己写的代码还没有引入的依赖大，同时因为业务依赖最终是要打包成产品，发布到网上的，所以我们也有动力，去最大程度上缩减业务依赖的大小。综上所述，将业务依赖纳入版本管理的成本，相对于带来的强一致性的好处来说，是可以接受的。</p>
-</blockquote>
-<p>首先，最简单快捷的方式，便是将 dependency 和 devDependency 分别拆分到两个 package.json 中，然后将 devDependency 的目录结构提升一个层次，利用 node.js 的模块层层向上查找的特性，基本不需要改动任何代码，即可完成对于 dependency 和 devDependency 的拆分，具体目录结构如下</p>
-<pre><code>|-- node\_modules # 安装 devDependency 的依赖
-|-- package.json # 记录 devDependency 的依赖
-|-- myApp
-    |-- node\_modules # 安装 dependency 的依赖
-    |-- src # 业务代
-    |-- package.json # 记录 dependency 的依赖
-|-- .gitignore
+        <h5 id="什么是Promise"><a href="#什么是Promise" class="headerlink" title="什么是Promise"></a>什么是Promise</h5><p>主要用于异步计算，可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果，可以在对象之间传递和操作promise，帮助我们处理队列。<br>在新建 promise 的时候就传入了两个参数resolve、reject，用来标记 promise的状态，可以随意命名，是promise对象中的回调函数<br>resolve(value): 表明 Promise 任务成功，调用then()的成功回调函数。<br>reject(error): 表明 Promise 任务失败，调用then()的错误回调函数。<br>如果 Promise 成功，则调用成功回调，如果失败，调用失败回调。<br>在异步任务完成之前，Promise 只是一个占位符。当你定义了一个 Promise，你并不会立即获得返回值，而是获得一个 Promise 对象。</p>
+<h5 id="在JavaScript中使用Promise"><a href="#在JavaScript中使用Promise" class="headerlink" title="在JavaScript中使用Promise"></a>在JavaScript中使用Promise</h5><h6 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h6><pre><code class="javascript">// 方式1 通过构造函数声明Promise对象
+const myPromise = new Promise((resolve, reject) =&gt; &#123;
+  setTimeout(() =&gt; &#123;
+    resolve(&#39;this is the eventual value the promise will return&#39;);
+  &#125;, 3000);
+&#125;);
+console.log(myPromise);
+//方式2 使用Promise内置API 
+const anotherPromise = Promise.resolve(&quot;this is the eventual value the promise will return&quot;)
+console.log(anotherPromise);
 </code></pre>
-<p>接着，我们在 .gitignore 文件中，排除掉安装 devDependency 依赖的 node_modules，而安装 dependency 依赖的 node_modules 则需要保留在 git 仓库中，具体内容如下</p>
-<pre><code>node\_modules
-\!myApp/node\_modules
+<h6 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h6><p>Promise 对象也能被_rejected_。大多数时候，rejected  的发生是因为执行异步任务的时候抛出了错误，此时就会调用reject()方法。<br>下面的示例展示了一个 Promise 对象是如何执行 reject 方法的:</p>
+<pre><code class="javascript">const myPromise = new Promise((resolve, reject) =&gt; &#123;
+  let a = false;
+  setTimeout(() =&gt; &#123;
+    return (a) ? resolve(&#39;a is found!&#39;): reject(&#39;sorry, no a&#39;);
+  &#125;, 3000);
+&#125;); 
 </code></pre>
-<blockquote>
-<p>这里将 dependency 依赖纳入 git 管理，有利有弊，坏处是会导致 git clone 下载的文件变大，好处是一方面我们可以通过 git 来保证业务依赖的强一致性，只要从同一个分支 checkout 出来的代码，业务依赖一定是完全一样的，另一方面如果有同学新增或者修改了业务依赖，也能够被 git 进行记录下来，做到变更的可追溯化，更进一步，还可以针对这种情况，进行专门的依赖评审，这在之前只是改改 package.json 就可以变更业务依赖的时候，是很容易就被忽略掉的，因此相对于大小问题，纳入 git 带来的稳定性与一致性的收益在我看来会更大一些。</p>
-</blockquote>
-<p>最后，建议将最外层的 package.json 中依赖库的版本锁定，或者交由专门的同学进行统一管理，业务的同学只需要关心自己的业务依赖。</p>
-<p>当然，以上的方案只是最简单的改造，基本思想就是关注点分离，工具的归工具，业务的归业务，对于不同项目的实际情况，可以在以上思路的基础上，更进一步的摸索，找到最符合自己团队的维护方式。</p>
+<h6 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h6><p>你可以定义两个回调函数，当 Promise 返回成功或失败时进行回调。这两个回调函数定义在then()内：</p>
+<pre><code class="javascript">const anotherPromise = new Promise((resolve, reject) =&gt; &#123;
+  setTimeout(() =&gt; &#123;
+    resolve(&#39;this is the eventual value the promise will return&#39;);
+  &#125;, 3000);
+&#125;);
+// CONTINUATION
+anotherPromise
+.then(value =&gt; &#123; console.log(value) &#125;)
+// 原则上可以无限链式调用，调用链会依次执行，而且前一个 then 的返回值作为参数传入后一个 then。
+anotherPromise
+.then(fulfillFn, rejectFn)
+.then(fulfilFn, rejectFn)
+.then(value =&gt; &#123; console.log(value) &#125;)
+</code></pre>
+<h6 id="使用catch"><a href="#使用catch" class="headerlink" title="使用catch()"></a>使用catch()</h6><p>then()方法必须有两个回调函数：第一个参数是成功回调，第二个参数是错误回调。<br>如果没有传入第二个回调函数，如果代码报错，就没有错误回调捕获错误信息。<br>如果执意要在then()中只定义一个回调函数（即成功回调），那么你就需要在 Promise 调用链的末端调用catch()方法捕获任何可能的报错信息。<br>在 Promise 调用链上，无论哪个环节报错，catch()方法都会被调用。</p>
+<pre><code class="javascript">const myPromise = new Promise((resolve, reject) =&gt; &#123;
+  let a = false;
+  setTimeout(() =&gt; &#123;
+    return (a) ? resolve(&#39;a is found!&#39;): reject(&#39;sorry, no a&#39;);
+  &#125;, 3000);
+&#125;); 
+myPromise
+.then(value =&gt; &#123; console.log(value) &#125;)
+.catch(err =&gt; &#123; console.log(err) &#125;);;
+</code></pre>
 
     </div>
 
@@ -254,12 +270,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/07/15/vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" rel="prev" title="vue组件通信">
-      <i class="fa fa-chevron-left"></i> vue组件通信
+    <a href="/2021/10/15/ReactHooks/" rel="prev" title="React Hooks">
+      <i class="fa fa-chevron-left"></i> React Hooks
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/10/07/article202110071654/" rel="next" title="article202110071654">
-      article202110071654 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/07/27/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/" rel="next" title="移动端适配方案 viewport">
+      移动端适配方案 viewport <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -319,7 +335,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#node-modules-%E7%8E%B0%E7%8A%B6"><span class="nav-text">node_modules 现状</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DevDependency-%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">DevDependency 带来的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="nav-text">优化方式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFPromise"><span class="nav-text">什么是Promise</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8JavaScript%E4%B8%AD%E4%BD%BF%E7%94%A8Promise"><span class="nav-text">在JavaScript中使用Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-text">创建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="nav-text">链式调用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8catch"><span class="nav-text">使用catch()</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -334,14 +350,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -368,7 +384,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
